@@ -1,58 +1,73 @@
-# 🌎 “MY World 2015” – Interactive Dashboard  
-_CS 171 • Lab 10_
+# MY World 2015 Interactive Dashboard
 
-D3.js visual exploration of the **United Nations “MY World 2015”** global
-survey, which asked millions of people to rank the issues that matter most for
-a better life (education, health, jobs, etc.).  
-The dashboard lets you:
+D3.js visualization exploring the United Nations MY World 2015 global survey, which asked millions of people to rank the issues that matter most for a better life.
 
-1. **Brush a date-range** selector to focus on any slice of responses  
-2. **See total responses over time** (CountVis)  
-3. **Break the sample down by age-groups** (AgeVis)  
-4. **Rank the 16 development priorities by popularity** (PrioVis)
+## Overview
 
----
+The dashboard provides three coordinated visualizations that respond to user interactions:
 
-## ✨ Features
+| Component | Type | Interaction |
+|-----------|------|-------------|
+| **CountVis** | Time series area chart | Brush to select date range, scroll to zoom |
+| **AgeVis** | Age distribution area chart | Updates based on selected date range |
+| **PrioVis** | Priority ranking bar chart | Shows 15 development priorities by popularity |
 
-| Component   | Interaction | Insight |
-|-------------|-------------|---------|
-| **CountVis** (`#countvis`) | Brush/drag to set start- and end-date | How survey participation grew |
-| **AgeVis** (`#agevis`) | Updates with brush | Age distribution of respondents |
-| **PrioVis** (`#priovis`) | Hover bars to see exact counts | What people in the brushed period care about |
+## Features
 
-Two grey labels above the brush (`#time-period-min`, `#time-period-max`) always
-show the currently selected date range.
+- **Date range brush**: Select any time period to filter all visualizations
+- **Zoom interaction**: Scroll on the time series to zoom in/out
+- **Cross-filtering**: All charts update in sync based on selection
+- **Responsive layout**: Bootstrap grid adapts to screen size
 
----
+## Tech Stack
 
-## Tech stack
+- **D3.js v7** - Data visualization and DOM manipulation
+- **Bootstrap 5.1** - Responsive grid and typography
+- **Google Fonts** - Neuton serif for headlines
 
-* **D3.js v7** – drawing & data joins  
-* **Bootstrap 5.1** – responsive grid & typography  
-* **Google Font _Neuton_** – headline serif font
+No build tools required. The page runs as static HTML with JavaScript modules.
 
-No build tool or bundler: the page is plain HTML + JS modules.
+## Project Structure
 
----
+```
+MY-World-2015/
+├── index.html              # Main page with layout and script tags
+├── css/
+│   └── style.css           # Custom colors and typography
+├── js/
+│   ├── main.js             # Data loading and visualization orchestration
+│   ├── countvis.js         # CountVis class (time series + brush/zoom)
+│   ├── agevis.js           # AgeVis class (age distribution)
+│   └── priovis.js          # PrioVis class (priority bar chart)
+├── data/
+│   ├── perDayData.json     # Survey responses aggregated by day
+│   └── myWorldFields.json  # Metadata for priorities and demographics
+└── fonts/
+    └── glyphicons-*        # Bootstrap icon fonts
+```
 
-## File structure
+## Usage
 
-		├── index.html # main page (layout + script tags)
-		├── css/
-		│ └── style.css # custom colours, fonts
-		├── js/
-		│ ├── countvis.js # class CountVis (line chart + brush)
-		│ ├── agevis.js # class AgeVis (bar/pie chart)
-		│ ├── priovis.js # class PrioVis (horizontal bar chart)
-		│ └── main.js # loads CSV, instantiates the three views
-		└── data/
-		└── myworld_2015.csv # cleaned UN survey (date, age, priority columns)
-		
-		
-		
-## Data source
-* ** United Nations Millennium Campaign –
-* ** MY World 2015 global survey (16 priorities, free download) https://www.myworld2015.org
+1. Open `index.html` in a web browser
+2. Drag on the time series chart to select a date range
+3. All visualizations update to show data within the selected period
+4. Scroll on the chart to zoom in/out on the time axis
 
-* ** Data was filtered to remove incomplete records and saved as data/myworld_2015.csv for offline use.		
+## Data Source
+
+United Nations Millennium Campaign - MY World 2015 global survey
+
+The survey asked participants to rank 16 development priorities including education, healthcare, jobs, food security, and political voice. Data has been aggregated by day and filtered to remove incomplete records.
+
+## Architecture
+
+The application uses an event-driven architecture:
+
+1. **main.js** loads JSON data and creates visualization instances
+2. **CountVis** triggers `selectionChanged` events when the brush moves
+3. **AgeVis** and **PrioVis** listen for events and filter their data accordingly
+4. All visualizations use the D3 update pattern (enter, update, exit)
+
+## License
+
+Educational use - CS 171 Data Visualization

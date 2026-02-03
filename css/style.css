@@ -1,54 +1,149 @@
-
+* {
+    box-sizing: border-box;
+}
 
 body {
-	font-family: 'Neuton', serif;
+    font-family: 'Neuton', serif;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.col-md-4,
+.col-md-8,
+.col-md-12 {
+    padding: 0 15px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        width: 33.333%;
+    }
+    .col-md-8 {
+        width: 66.667%;
+    }
+    .col-md-12 {
+        width: 100%;
+    }
 }
 
 h1 {
-	font-size: 36px;
-	color: #825a5a;
-	margin-top: 40px;
+    font-size: 36px;
+    color: #825a5a;
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+.h1-sub {
+    font-weight: 700;
 }
 
 h2 {
-	color: #94a97a;
-	font-size: 24px;
-	margin-top: 10px;
-	margin-bottom: 30px;
+    color: #94a97a;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-weight: 400;
 }
 
-/*
-.brush {
-	fill: #ccc;
-	fill-opacity: .5;
-	pointer-events: none;
-}*/
+.time-period-labels {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.date-label {
+    display: inline-block;
+    background: #e8e8e8;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #444;
+    font-weight: 500;
+}
+
+.date-separator {
+    margin: 0 10px;
+    color: #888;
+    font-size: 16px;
+}
+
+#countvis,
+#agevis,
+#priovis {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
 
 .axis line,
 .axis path {
-  fill: none;
-  stroke: #555;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #ccc;
+    shape-rendering: crispEdges;
 }
 
 .tick text {
-	font-family: sans-serif;
-	font-size: 11px;
-	fill: #555;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    fill: #666;
 }
 
 #priovis .x-axis text {
-	font-weight: 600;
+    font-weight: 600;
+    font-size: 10px;
 }
 
 .area {
-	fill: #825a5a;
+    fill: #825a5a;
+    opacity: 0.85;
 }
 
 .area.area-age {
-	fill: #94a97a;
+    fill: #94a97a;
+    opacity: 0.85;
 }
 
 .bar {
-	fill: #93bebf;
+    fill: #93bebf;
+}
+
+.bar:hover {
+    fill: #7aa9ab;
+}
+
+.brush .selection {
+    fill: #825a5a;
+    fill-opacity: 0.2;
+    stroke: #825a5a;
+    stroke-width: 1px;
+}
+
+svg text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    fill: #555;
 }
